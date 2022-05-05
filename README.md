@@ -1,3 +1,5 @@
+![logo](metaSpectraST_logo.png)
+
 # metaSpectraST
 
 ![version](https://img.shields.io/badge/metaSpectraST-v0.0-green) ![license](https://img.shields.io/badge/license-MIT-green) ![commit](https://img.shields.io/github/last-commit/bravokid47/metaSpectraST?color=orange)
@@ -11,4 +13,4 @@ Spectrally similar MS/MS spectra that are grouped in one spectral cluster are pr
   - [Dependencies]()
   - [Install metaSpectraST]()
 - [Quick start]()
-- [About]
+- [About]()
