@@ -8,6 +8,9 @@ metaSpectraST is an unsupervised and database-independent analysis tools for met
 
 Spectrally similar MS/MS spectra that are grouped in one spectral cluster are presumed to originate from the sampe peptide sequence, and therefore metaSpecraST treats them as replicate spectra and quantitatively profiles samples by counting the number (spectral count, SC) or intentisity of replicate spectra (spectral index, SI<sub>N</sub>) in each spectral cluster.
 
+You can use metaSpectraST,
+
+
 # Contents
 - [Installation]()
   - [Dependencies]()
