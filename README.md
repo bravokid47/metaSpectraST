@@ -22,6 +22,11 @@ With metaSpectraST you can,
   - [Dependencies](https://github.com/bravokid47/metaSpectraST/edit/main/README.md#dependencies)
   - [Installing metaSpectraST](https://github.com/bravokid47/metaSpectraST/edit/main/README.md#installing-metaspectrast)
 - [Quick start]()
+  - [Step 0, preparing your data]()
+  - [Step 1, performing spectral cluster]()
+  - [Step 2, profiling samples]()
+  - [Step 3, classifying samples and visulization]()
+  - [Reconciliation scheme]()
 - [About]()
 
 # Installation
@@ -67,7 +72,13 @@ git clone https://github.com/bravokid47/metaSpectraST.git
 ```shell
 export PATH="$PATH:yourpath/metaspectrast";
 ```
+# Quick start
+## Step 0, prepare your data
+metaSpectraST can perform spectral clustering from the following data formats:
+- mzML format
+- mzXML format
+- mgf format
 
-
+## Step 1, 
 
 
