@@ -23,7 +23,7 @@ With metaSpectraST you can,
   - [Installing metaSpectraST](https://github.com/bravokid47/metaSpectraST/edit/main/README.md#installing-metaspectrast)
 - [Quick start]()
   - [Step 0, preparing your data]()
-  - [Step 1, performing spectral cluster]()
+  - [Step 1, performing spectral clustering]()
   - [Step 2, profiling samples]()
   - [Step 3, classifying samples and visulization]()
   - [Reconciliation scheme]()
@@ -73,12 +73,18 @@ git clone https://github.com/bravokid47/metaSpectraST.git
 export PATH="$PATH:yourpath/metaspectrast";
 ```
 # Quick start
-## Step 0, prepare your data
+## Step 0, preparing your data
 metaSpectraST can perform spectral clustering from the following data formats:
 - mzML format
 - mzXML format
 - mgf format
 
-## Step 1, 
+Please note that mgf format is required for computing the normalized spectral index (SI<sub>N</sub>). File formats can be converted with [msconvert](https://proteowizard.sourceforge.io/tools.shtml) or [ThermoRawFileParser](https://github.com/bravokid47/ThermoRawFileParser).
 
+## Step 1, performing spectral clustering
+Run the following command to perfom spectral clustering:
+
+```shell
+metaspectrast
+```
 
