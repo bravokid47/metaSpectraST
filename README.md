@@ -56,6 +56,18 @@ BiocManager::install("limma")
 ```
 
 ## Installing metaSpectraST
+1. Download or clone the repository:
+
+```shell
+git clone https://github.com/bravokid47/metaSpectraST.git
+```
+
+2. Make metaSpectraST executable by adding the directory ```yourpath/metaspectrast/``` to the environment variable ```$PATH```, or just copy the following line to the ```~/.bashrc``` or ```~/.bash_profile``` file.
+
+```shell
+export PATH="$PATH:yourpath/metaspectrast";
+```
+
 
 
 
