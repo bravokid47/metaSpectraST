@@ -138,7 +138,7 @@ Fragmentation type (ETD, HCD, CID-QTOF) of the spectra can be specified by the `
 metaspectrast cluster -i HCD <path/*mzML>
 ```
 
-When this step is done, it produces three types of output file in the working directory. The file ```bar.splib``` is the spectra library in a binary format. The ```bar.sptxt``` is a human-readable version of the bar.splib. The files ```bar.spidx``` and ```bar.pepidx``` are indices on the precursor m/z value and peptide, respectively. The file ```grandConsensus.sptxt``` is the library of consensus spectra, which will be used in the subsequent steps.
+When this step is done, it produces three types of output file in the working directory. The file ```bar.splib``` is the spectra library in a binary format. The ```bar.sptxt``` is a human-readable version of the bar.splib. The files ```bar.spidx``` and ```bar.pepidx``` are indices on the precursor m/z value and peptide, respectively. The file ```grandConsensus.sptxt``` is the library of consensus spectra, which will be used in the subsequent steps. A library of consensus spectra in .mgf format is also produced, named as ```grandConsensus.mgf```.
 
 ## Step 2: profiling samples
 Consensus spectrum created in step 1 can be quantified by counting the the number (spectral count, SC) or intentisity (spectral index, SI<sub>N</sub>) of the replicate spectra (raw spectra) in the corresponding spectral cluster in the sample. Quantified consensus spectra can then be used to profile the samples.
@@ -164,7 +164,7 @@ When it is done, it produces three CSV files, ```unnorm_consensusPep_SI.csv```, 
 Hierarchical clustering of samples can be performed based on their SI<sub>N</sub> or SC profiles. But before that, SI<sub>N</sub> or SC profiles need to be normalized.
 
 ### Normalization
-Normalization of SI<sub>N</sub> or SC profiles can be performed by simply diving by the sum of the SI<sub>N</sub> or SC in each data set. Note that the file ``` consensusPep_SIn.csv``` can be used for hierarchical clustering directly as it has been normalized by the sum of the SI<sub>N</sub> in each data set already. Alternatively, run the following command to normalize the SI<sub>N</sub> or SC profiles. The ```normalize``` module normalizes the data using the trimmed mean of M-values (TMM) normalization method implemented in the edgeR package.
+Normalization of the SI<sub>N</sub> or SC profiles can be performed by simply diving by the sum of the SI<sub>N</sub> or SC in each data set. Note that the file ``` consensusPep_SIn.csv``` can be used for hierarchical clustering directly as it has been normalized by the sum of the SI<sub>N</sub> in each data set already. Alternatively, run the following command to normalize the SI<sub>N</sub> or SC profiles. The ```normalize``` module normalizes the data using the trimmed mean of M-values (TMM) normalization method implemented in the edgeR package.
 
 ```shell
 metaspectrast normalize -u unnorm_consensusPep_SI.csv
@@ -178,3 +178,19 @@ Run the following command to perform the hierarchical clustering on samples.
 ```shell
 metaspectrast classify -n tmmNorm_consensusPep.csv
 ```
+
+If you are working with microbial communities in or on a host organism, such as gut microbiome, you could exclude the consensus spectra of the host peptides by providing metaSpectraST a .txt file containing containing a single column of the full name of the consensus spectra that need to be excluded. Consensus spectra of host peptides can be identified by database search of the consensus spectra library (```grandConsensus.mgf```) against the host proteome database.
+
+```shell
+metaspectrast classify -n tmmNorm_consensusPep.csv -r removal.txt
+```
+
+Further refinement of the SI<sub>N</sub> or SC profiles can be conducted through the ```-o``` option, which specifies the minimum number of samples that a consensus spectrum has to be observed in. This opiton can help filter out the singly or rarely observed consensus spectra. Default is 1.
+
+```shell
+metaspectrast classify -n tmmNorm_consensusPep.csv -r removal.txt -o 3
+```
+
+At the end of the day, two figures are produced. One is the file ```hierarchicalHeatmap.png```, which is a heatmap with some decorations showing the clusters of the samples. The other is the file ```dendrogram.png```, which is a dendrogram of the clusters of the samples.
+
+## Reconciliation
