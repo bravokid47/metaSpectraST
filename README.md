@@ -22,7 +22,8 @@ With metaSpectraST you can,
   - [Dependencies](https://github.com/bravokid47/metaSpectraST/edit/main/README.md#dependencies)
   - [Installing metaSpectraST](https://github.com/bravokid47/metaSpectraST/edit/main/README.md#installing-metaspectrast)
 - [Quick start]()
-  - [Step 0, preparing your data]()
+  - [Data format]()
+  - [Modules of metaSpectraST]()
   - [Step 1, performing spectral clustering]()
   - [Step 2, profiling samples]()
   - [Step 3, classifying samples and visulization]()
@@ -73,7 +74,7 @@ git clone https://github.com/bravokid47/metaSpectraST.git
 export PATH="$PATH:yourpath/metaspectrast";
 ```
 # Quick start
-## Step 0, preparing your data
+## Data format
 metaSpectraST can perform spectral clustering from the following data formats:
 - mzML format
 - mzXML format
@@ -81,10 +82,53 @@ metaSpectraST can perform spectral clustering from the following data formats:
 
 Please note that mgf format is required for computing the normalized spectral index (SI<sub>N</sub>). File formats can be converted with [msconvert](https://proteowizard.sourceforge.io/tools.shtml) or [ThermoRawFileParser](https://github.com/bravokid47/ThermoRawFileParser).
 
+## Modules of metaSpectraST
+There are 6 individual modules in metaSpectraST. Run the following command to get explanation of the 6 modules.
+
+```shell
+metaspectrast -h
+```
+
+Output
+```
+>>>
+_________ metaSpectraST by Hao, Chunlin _________
+
+metaSpectraST v=0.0
+Usage: metaspectrast [module]
+
+Module:
+1  cluster          Clustering MS/MS spectra and create consensus spectra
+2  computesc        Spectral count-based (SC) sample profiling
+3  computesin       Normalized spectral index (SIn) based sample profiling
+4  normalize        Normlizing the data matrix of sample profiles (SC or SIn)
+5  classify         Hierarchically clustering and classifying samples
+6  reconcile        Reconciliation scheme
+```
+Each module is run separately. For example, to run the ```computesin``` module,
+
+```shell
+metaspectrast computesin -h
+```
+
+Output
+```
+>>>
+usage: metaSpectraST_SIn.py [-h] [-s [SPTXT]] -m MGF [MGF ...]
+
+metaSpectraST (v0.0) by Hao, Chunlin.
+Compute normalized spectral index (SIn) of cnsensus spectra.
+
+optional arguments:
+  -h, --help        show this help message and exit
+  -s [SPTXT]        consensus spectra .sptxt file, grandConsensus.sptxt by default.
+  -m MGF [MGF ...]  raw spectra data sets in MGF format
+```
+
 ## Step 1, performing spectral clustering
 Run the following command to perfom spectral clustering:
 
 ```shell
-metaspectrast
+metaspectrast cluster <path/*mzML>
 ```
 
