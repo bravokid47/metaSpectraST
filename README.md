@@ -6,7 +6,7 @@
 
 metaSpectraST is an unsupervised and database-independent analysis tools for metaproteomic MS/MS data using spectrum clustering. It clusters all experimentally observed MS/MS spectra based on their spectral similarity and create a representative consensus spectrum for each cluster by using the spectrum clustering algorithm implemented in the spectral library search engine, [SpectraST](http://tools.proteomecenter.org/wiki/index.php?title=Software:SpectraST). 
 
-Spectrally similar MS/MS spectra that are grouped in one spectral cluster are presumed to originate from the sampe peptide sequence, and therefore metaSpecraST treats them as replicate spectra and quantitatively profiles samples by counting the number (spectral count, SC) or intentisity of replicate spectra (spectral index, SI<sub>N</sub>) in each spectral cluster.
+Spectrally similar MS/MS spectra that are grouped in one spectral cluster are presumed to originate from the sampe peptide sequence, and therefore metaSpecraST treats them as replicate spectra and quantitatively profiles samples by counting the number (spectral count, SC) or intentisity (spectral index, SI<sub>N</sub>) of replicate spectra in each spectral cluster.
 
 The metaSpectraST spectral clusters also offer a portal to integrate and reconcile multiple peptide identification approacheds, including database search, open modification search, and *de novo* sequencing. For each spectral cluster, sequences of raw spectra and their cosensus spectrum assigned by different indentification methods vote for the consensus peptide sequence of the spectral cluster through a heuristic reconciliation scheme and the majority rule.
 
@@ -24,9 +24,9 @@ With metaSpectraST you can,
 - [Quick start]()
   - [Data format]()
   - [Modules of metaSpectraST]()
-  - [Step 1, performing spectral clustering]()
-  - [Step 2, profiling samples]()
-  - [Step 3, classifying samples and visulization]()
+  - [Step 1: performing spectral clustering]()
+  - [Step 2: profiling samples]()
+  - [Step 3: classifying samples and visulization]()
   - [Reconciliation scheme]()
 - [About]()
 
@@ -125,10 +125,35 @@ optional arguments:
   -m MGF [MGF ...]  raw spectra data sets in MGF format
 ```
 
-## Step 1, performing spectral clustering
+## Step 1: performing spectral clustering
 Run the following command to perfom spectral clustering:
 
 ```shell
 metaspectrast cluster <path/*mzML>
 ```
+
+Fragmentation type (ETD, HCD, CID-QTOF) of the spectra can be specified by the ```-i``` option. Default is off and the fragmentation type can be determined from the data files.
+
+```shell
+metaspectrast cluster -i HCD <path/*mzML>
+```
+
+When it is done, it produces three types of output file in the directory of input file. The file ```bar.splib``` is the spectra library in a binary format. The ```bar.sptxt``` is a human-readable version of the bar.splib. The files ```bar.spidx``` and ```bar.pepidx``` are indices on the precursor m/z value and peptide, respectively. The file ```grandConsensus.sptxt``` is the library of consensus spectra, which will be used in the subsequent steps.
+
+## Step 2: profiling samples
+Consensus spectrum created in step 1 can be quantified by counting the the number (spectral count, SC) or intentisity (spectral index, SI<sub>N</sub>) of the replicate spectra (raw spectra) in the corresponding spectral cluster in the sample. Quantified consensus spectra can be used to profile the samples.
+
+**Spectral count-based profiling**
+
+```shell
+metaspectrast computesc -s <path/grandConsensus.sptxt>
+```
+
+**Normalized spectral index-based profiling**
+
+```shell
+metaspectrast computesin -s <path/grandConsensus.sptxt> -m <path/*mgf>
+```
+
+
 
