@@ -138,22 +138,43 @@ Fragmentation type (ETD, HCD, CID-QTOF) of the spectra can be specified by the `
 metaspectrast cluster -i HCD <path/*mzML>
 ```
 
-When it is done, it produces three types of output file in the directory of input file. The file ```bar.splib``` is the spectra library in a binary format. The ```bar.sptxt``` is a human-readable version of the bar.splib. The files ```bar.spidx``` and ```bar.pepidx``` are indices on the precursor m/z value and peptide, respectively. The file ```grandConsensus.sptxt``` is the library of consensus spectra, which will be used in the subsequent steps.
+When this step is done, it produces three types of output file in the working directory. The file ```bar.splib``` is the spectra library in a binary format. The ```bar.sptxt``` is a human-readable version of the bar.splib. The files ```bar.spidx``` and ```bar.pepidx``` are indices on the precursor m/z value and peptide, respectively. The file ```grandConsensus.sptxt``` is the library of consensus spectra, which will be used in the subsequent steps.
 
 ## Step 2: profiling samples
-Consensus spectrum created in step 1 can be quantified by counting the the number (spectral count, SC) or intentisity (spectral index, SI<sub>N</sub>) of the replicate spectra (raw spectra) in the corresponding spectral cluster in the sample. Quantified consensus spectra can be used to profile the samples.
+Consensus spectrum created in step 1 can be quantified by counting the the number (spectral count, SC) or intentisity (spectral index, SI<sub>N</sub>) of the replicate spectra (raw spectra) in the corresponding spectral cluster in the sample. Quantified consensus spectra can then be used to profile the samples.
 
-**Spectral count-based profiling**
+**Spectral count-based (SC) profiling**
 
 ```shell
 metaspectrast computesc -s <path/grandConsensus.sptxt>
 ```
 
-**Normalized spectral index-based profiling**
+When it is done, it produces two CSV files, ```unnorm_consensusPep_SC.csv``` and ```consensusSpec_RawSpectra_idx.csv```. The file unnorm_consensusPep_SC.csv is unnormalized spectral count of consensus spectra in each sample, which can be normalized by the ```normalize``` module (see [Step 3]()) or simply normalized by the sum of the spectral count in each data set. The file consensusSpec_RawSpectra_idx.csv is the index of the correspondence of raw spectrum and its consensus spectrum.
+
+**Normalized spectral index-based (SI<sub>N</sub>) profiling**
 
 ```shell
 metaspectrast computesin -s <path/grandConsensus.sptxt> -m <path/*mgf>
 ```
+Note that the .mgf file has to be named the same as the the corresponding input file in [Step 1](). 
 
+When it is done, it produces three CSV files, ```unnorm_consensusPep_SI.csv```, ```consensusPep_SIn.csv``` and ```consensusSpec_RawSpectra_idx.csv```. Similar to SC profiling, the file unnorm_consensusPep_SI.csv is unnormalized spectral index of consensus spectra in each sample, which can be normalized by the ```normalize``` module (see [Step 3]()). The file consensusPep_SIn.csv is the same file as unnorm_consensusPep_SI.csv, but normalized by the sum of the spectral index in each data set. The file consensusSpec_RawSpectra_idx.csv is the index of the correspondence of raw spectrum and its consensus spectrum.
 
+## Step 3: classifying samples and visulization
+Hierarchical clustering of samples can be performed based on their SI<sub>N</sub> or SC profiles. But before that, SI<sub>N</sub> or SC profiles need to be normalized.
 
+### Normalization
+Normalization of SI<sub>N</sub> or SC profiles can be performed by simply diving by the sum of the SI<sub>N</sub> or SC in each data set. Note that the file ``` consensusPep_SIn.csv``` can be used for hierarchical clustering directly as it has been normalized by the sum of the SI<sub>N</sub> in each data set already. Alternatively, run the following command to normalize the SI<sub>N</sub> or SC profiles. The ```normalize``` module normalizes the data using the trimmed mean of M-values (TMM) normalization method implemented in the edgeR package.
+
+```shell
+metaspectrast normalize -u unnorm_consensusPep_SI.csv
+```
+
+The normalized file is named as ```tmmNorm_consensusPep.csv```. The scaling factor of each data set can be found in the file ```tmm_scalingFactor.csv```.
+
+### Hierarchical clustering
+Run the following command to perform the hierarchical clustering on samples.
+
+```shell
+metaspectrast classify -n tmmNorm_consensusPep.csv
+```
