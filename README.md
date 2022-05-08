@@ -194,4 +194,6 @@ metaspectrast classify -n tmmNorm_consensusPep.csv -r removal.txt -o 3
 At the end of the day, two figures are produced. One is the file ```hierarchicalHeatmap.png```, which is a heatmap with some decorations showing the clusters of the samples. The other is the file ```dendrogram.png```, which is a dendrogram of the clusters of the samples.
 
 ## Reconciliation
-Peptide sequences of raw spectra and consensus spectra can be identified by multiple peptide identification methods, including database search, open modification search, and *de novo* sequencing. Replicate spectra and the consensus spectrum in one spectral cluster may be identified as 
+Peptide sequences of raw spectra and consensus spectra can be identified thorugh multiple peptide identification methods, including database search, open modification search, and *de novo* sequencing. Replicate spectra and the consensus spectrum in one spectral cluster may be identified as conflicting peptide sequences by different identification methods. The ```reconcile``` module employs a heuristic reconciliation scheme to resolve the conflicts and correct seqeunce errors.
+
+![reconcile](fig3_reconciliation_scheme.png)
