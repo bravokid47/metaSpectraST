@@ -19,11 +19,11 @@ With metaSpectraST you can,
 
 # Contents
 - [Installation](https://github.com/bravokid47/metaSpectraST#installation)
-  - [Dependencies](https://github.com/bravokid47/metaSpectraST/README.md#dependencies)
-  - [Installing metaSpectraST](https://github.com/bravokid47/metaSpectraST/README.md#installing-metaspectrast)
-- [Quick start](https://github.com/bravokid47/metaSpectraST/README.md#quick-start)
-  - [Data format](https://github.com/bravokid47/metaSpectraST/README.md#data-format)
-  - [Modules of metaSpectraST]()
+  - [Dependencies](https://github.com/bravokid47/metaSpectraST#dependencies)
+  - [Installing metaSpectraST](https://github.com/bravokid47/metaSpectraST#installing-metaspectrast)
+- [Quick start](https://github.com/bravokid47/metaSpectraST#quick-start)
+  - [Data format](https://github.com/bravokid47/metaSpectraST#data-format)
+  - [Modules of metaSpectraST](https://github.com/bravokid47/metaSpectraST#modules-of-metaspectast)
   - [Step 1: performing spectral clustering]()
   - [Step 2: profiling samples]()
   - [Step 3: classifying samples and visulization]()
