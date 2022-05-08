@@ -1,4 +1,4 @@
-![logo](metaSpectraST_logo.png)
+![logo](fig/metaSpectraST_logo.png)
 
 # metaSpectraST
 
