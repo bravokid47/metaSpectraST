@@ -18,7 +18,7 @@ With metaSpectraST you can,
 4. Integrate and reconcile multiple peptide/protein identification approaches for further taxonomic or functional studies.
 
 # Contents
-- [Installation](https://github.com/bravokid47/metaSpectraST/README.md#installation)
+- [Installation](https://github.com/bravokid47/metaSpectraST#installation)
   - [Dependencies](https://github.com/bravokid47/metaSpectraST/README.md#dependencies)
   - [Installing metaSpectraST](https://github.com/bravokid47/metaSpectraST/README.md#installing-metaspectrast)
 - [Quick start](https://github.com/bravokid47/metaSpectraST/README.md#quick-start)
