@@ -23,12 +23,13 @@ With metaSpectraST you can,
   - [Installing metaSpectraST](https://github.com/bravokid47/metaSpectraST#installing-metaspectrast)
 - [Quick start](https://github.com/bravokid47/metaSpectraST#quick-start)
   - [Data format](https://github.com/bravokid47/metaSpectraST#data-format)
-  - [Modules of metaSpectraST](https://github.com/bravokid47/metaSpectraST#modules-of-metaspectast)
-  - [Step 1: performing spectral clustering]()
-  - [Step 2: profiling samples]()
-  - [Step 3: classifying samples and visulization]()
-  - [Reconciliation scheme]()
-- [About]()
+  - [Modules of metaSpectraST](https://github.com/bravokid47/metaSpectraST#modules-of-metaspectrast)
+  - [Step 1: performing spectral clustering](https://github.com/bravokid47/metaSpectraST#step-1-performing-spectral-clustering)
+  - [Step 2: profiling samples](https://github.com/bravokid47/metaSpectraST#step-2-profiling-samples)
+  - [Step 3: classifying samples and visulization](https://github.com/bravokid47/metaSpectraST#step-3-classifying-samples-and-visulization)
+  - [Reconciliation scheme](https://github.com/bravokid47/metaSpectraST#reconciliation)
+- [About](https://github.com/bravokid47/metaSpectraST#about)
+  - [How to cite](https://github.com/bravokid47/metaSpectraST#how-to-cite)
 
 # Installation
 ## Dependencies
@@ -149,16 +150,16 @@ Consensus spectrum created in step 1 can be quantified by counting the the numbe
 metaspectrast computesc -s <path/grandConsensus.sptxt>
 ```
 
-When it is done, it produces two CSV files, ```unnorm_consensusPep_SC.csv``` and ```consensusSpec_RawSpectra_idx.csv```. The file unnorm_consensusPep_SC.csv is unnormalized spectral count of consensus spectra in each sample, which can be normalized by the ```normalize``` module (see [Step 3]()) or simply normalized by the sum of the spectral count in each data set. The file consensusSpec_RawSpectra_idx.csv is the index of the correspondence of raw spectrum and its consensus spectrum.
+When it is done, it produces two CSV files, ```unnorm_consensusPep_SC.csv``` and ```consensusSpec_RawSpectra_idx.csv```. The file unnorm_consensusPep_SC.csv is unnormalized spectral count of consensus spectra in each sample, which can be normalized by the ```normalize``` module (see [Step 3](https://github.com/bravokid47/metaSpectraST#step-3-classifying-samples-and-visulization)) or simply normalized by the sum of the spectral count in each data set. The file consensusSpec_RawSpectra_idx.csv is the index of the correspondence of raw spectrum and its consensus spectrum.
 
 **Normalized spectral index-based (SI<sub>N</sub>) profiling**
 
 ```shell
 metaspectrast computesin -s <path/grandConsensus.sptxt> -m <path/*mgf>
 ```
-Note that the .mgf file has to be named the same as the the corresponding input file in [Step 1](). 
+Note that the .mgf file has to be named the same as the the corresponding input file in [Step 1](https://github.com/bravokid47/metaSpectraST#step-1-performing-spectral-clustering). 
 
-When it is done, it produces three CSV files, ```unnorm_consensusPep_SI.csv```, ```consensusPep_SIn.csv``` and ```consensusSpec_RawSpectra_idx.csv```. Similar to SC profiling, the file unnorm_consensusPep_SI.csv is unnormalized spectral index of consensus spectra in each sample, which can be normalized by the ```normalize``` module (see [Step 3]()). The file consensusPep_SIn.csv is the same file as unnorm_consensusPep_SI.csv, but normalized by the sum of the spectral index in each data set. The file consensusSpec_RawSpectra_idx.csv is the index of the correspondence of raw spectrum and its consensus spectrum.
+When it is done, it produces three CSV files, ```unnorm_consensusPep_SI.csv```, ```consensusPep_SIn.csv``` and ```consensusSpec_RawSpectra_idx.csv```. Similar to SC profiling, the file unnorm_consensusPep_SI.csv is unnormalized spectral index of consensus spectra in each sample, which can be normalized by the ```normalize``` module (see [Step 3](https://github.com/bravokid47/metaSpectraST#step-3-classifying-samples-and-visulization)). The file consensusPep_SIn.csv is the same file as unnorm_consensusPep_SI.csv, but normalized by the sum of the spectral index in each data set. The file consensusSpec_RawSpectra_idx.csv is the index of the correspondence of raw spectrum and its consensus spectrum.
 
 ## Step 3: classifying samples and visulization
 Hierarchical clustering of samples can be performed based on their SI<sub>N</sub> or SC profiles. But before that, SI<sub>N</sub> or SC profiles need to be normalized.
