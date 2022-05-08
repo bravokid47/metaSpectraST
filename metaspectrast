@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Hao, Chunlin@20220506
+
+VERSION=0.0
+PIPES=$(dirname $(which metaspectrast))/bin
+
+help_msg () {
+	echo "_________ metaSpectraST by Hao, Chunlin _________"
+	echo ""
+	echo "metaSpectraST v=${VERSION}"
+	echo "Usage: metaspectrast [module]"
+	echo ""
+	echo "Module:"
+	echo "1  cluster          Clustering MS/MS spectra and create consensus spectra"
+	echo "2  computesc        Spectral count-based (SC) sample profiling"
+	echo "3  computesin       Normalized spectral index (SIn) based sample profiling"
+	echo "4  normalize        Normlizing the data matrix of sample profiles (SC or SIn)"
+	echo "5  classify         Hierarchically clustering and classifying samples"
+	echo "6  reconcile        Reconciliation scheme"
+}
+
+
+if [ "$1" = cluster ]; then
+	${PIPES}/runSpectraST.sh ${@:2}
+elif [ "$1" = computesc ]; then
+	python ${PIPES}/metaSpectraST_SC.py ${@:2}
+elif [ "$1" = computesin ]; then
+	python ${PIPES}/metaSpectraST_SIn.py ${@:2}
+elif [ "$1" = normalize ]; then
+	python ${PIPES}/normalization.py ${@:2}
+elif [ "$1" = classify ]; then
+	python ${PIPES}/hierarchy_heatmap.py ${@:2}
+elif [ "$1" = reconcile ]; then
+	python ${PIPES}/vote_consensusPep.py ${@:2}
+elif [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+	help_msg
+	exit 0
+elif [ "$1" = "-v" ] || [ "$1" = "--version" ]; then
+	echo "metaSpectraST v${VERSION} by Hao, Chunlin"
+	exit 0
+else
+	echo "Please select a proper module of metaSpectraST."
+	echo ""
+	help_msg
+	exit 1
+fi
