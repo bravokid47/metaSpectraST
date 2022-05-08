@@ -199,7 +199,7 @@ Peptide sequences of raw spectra and consensus spectra can be identified thorugh
 
 **Reconciliation scheme**
 
-![reconcile](fig3_reconciliation_scheme.png)
+![reconcile](fig/fig3_reconciliation_scheme.png)
 
 **Prepareing identification results**
 
