@@ -196,4 +196,34 @@ At the end of the day, two figures are produced. One is the file ```hierarchical
 ## Reconciliation
 Peptide sequences of raw spectra and consensus spectra can be identified thorugh multiple peptide identification methods, including database search, open modification search, and *de novo* sequencing. Replicate spectra and the consensus spectrum in one spectral cluster may be identified as conflicting peptide sequences by different identification methods. The ```reconcile``` module employs a heuristic reconciliation scheme to resolve the conflicts and correct seqeunce errors.
 
+**Reconciliation scheme**
+
 ![reconcile](fig3_reconciliation_scheme.png)
+
+**Prepareing identification results**
+
+To run the ```reconcile``` module, you need to prepare the identification results first. It's very simple. You just need to organize the identification results of raw spectra as CSV files containing at least two columns, ```RawSpectrum``` and ```peptide```. The 'RawSpectrum' column lists the recorded name of each raw spectrum, while the 'peptide' column lists the peptide sequence assigned to each raw spectrum. If the identification method provides protein information, you can add it as an additional column with the header of ```protein```. Identification results from different identification methods should be organized as separate CSV files. For identification results of consensus spectra, please change the header ```RawSpectrum``` to ```consensusSpec```.
+
+Then run the following command to start the reconciliation procedure.
+
+```shell
+metaspectrast reconcile -d raw_DB.csv -t raw_taggraph.csv -n raw_denovo -c consensus_DB.csv -i consensusSpec_RawSpectra_idx.csv
+```
+
+Option arguments
+```
+  -d      Specifies the result of database search of raw spectra.
+  -t      Specifies the result of open modification of raw spectra.
+  -n      Specifies the result of de novo sequencing of raw spectra.
+  -c      Specifies the result of database search of consensus spectra.
+  -i      Specifies the index of correspondence of raw spectrum and its consensus spectrum.
+          By default, 'consensusSpec_RawSpectra_idx.csv' generated automatically by the 'computesc' or 'computesin' module will be used.
+```
+
+# About
+Author: Hao, Chunlin
+
+Principle Investigators: Henry H. N. Lam (HKUST), Patrick K. H. Lee (CityU), and Joshua Elias (CZ Biohub).
+
+## How to cite
+
