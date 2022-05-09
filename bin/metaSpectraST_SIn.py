@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(\
 	formatter_class=argparse.RawDescriptionHelpFormatter,\
 	description=textwrap.dedent('''\
 		metaSpectraST (v0.0) by Hao, Chunlin.
-		Compute normalized spectral index (SIn) of cnsensus spectra.
+		Compute normalized spectral index (SIn) of consensus spectra.
 								'''))
 parser.add_argument('-s', nargs='?', action='store', dest='sptxt',\
 					required=False, default='grandConsensus.sptxt',\
