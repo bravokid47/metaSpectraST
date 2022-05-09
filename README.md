@@ -6,9 +6,9 @@
 
 metaSpectraST is an unsupervised and database-independent analysis tools for metaproteomic MS/MS data using spectrum clustering. It clusters all experimentally observed MS/MS spectra based on their spectral similarity and create a representative consensus spectrum for each cluster by using the spectrum clustering algorithm implemented in the spectral library search engine, [SpectraST](http://tools.proteomecenter.org/wiki/index.php?title=Software:SpectraST). 
 
-Spectrally similar MS/MS spectra that are grouped in one spectral cluster are presumed to originate from the sampe peptide sequence, and therefore metaSpecraST treats them as replicate spectra and quantitatively profiles samples by counting the number (spectral count, SC) or intentisity (spectral index, SI<sub>N</sub>) of replicate spectra in each spectral cluster.
+Spectrally similar MS/MS spectra that are grouped in one spectral cluster are presumed to originate from the same peptide sequence, and therefore metaSpecraST treats them as replicate spectra and quantitatively profiles samples by counting the number (spectral count, SC) or intensity (spectral index, SI<sub>N</sub>) of replicate spectra in each spectral cluster.
 
-The metaSpectraST spectral clusters also offer a portal to integrate and reconcile multiple peptide identification approacheds, including database search, open modification search, and *de novo* sequencing. For each spectral cluster, sequences of raw spectra and their cosensus spectrum assigned by different indentification methods vote for the consensus peptide sequence of the spectral cluster through a heuristic reconciliation scheme and the majority rule.
+The metaSpectraST spectral clusters also offer a portal to integrate and reconcile multiple peptide identification approaches, including database search, open modification search, and *de novo* sequencing. For each spectral cluster, sequences of raw spectra and their cosnensus spectrum assigned by different identification methods vote for the consensus peptide sequence of the spectral cluster through a heuristic reconciliation scheme and the majority rule.
 
 With metaSpectraST you can,
 
@@ -26,7 +26,7 @@ With metaSpectraST you can,
   - [Modules of metaSpectraST](https://github.com/bravokid47/metaSpectraST#modules-of-metaspectrast)
   - [Step 1: performing spectral clustering](https://github.com/bravokid47/metaSpectraST#step-1-performing-spectral-clustering)
   - [Step 2: profiling samples](https://github.com/bravokid47/metaSpectraST#step-2-profiling-samples)
-  - [Step 3: classifying samples and visulization](https://github.com/bravokid47/metaSpectraST#step-3-classifying-samples-and-visulization)
+  - [Step 3: classifying samples and visualization](https://github.com/bravokid47/metaSpectraST#step-3-classifying-samples-and-visulization)
   - [Reconciliation scheme](https://github.com/bravokid47/metaSpectraST#reconciliation)
 - [About](https://github.com/bravokid47/metaSpectraST#about)
   - [How to cite](https://github.com/bravokid47/metaSpectraST#how-to-cite)
@@ -38,7 +38,7 @@ With metaSpectraST you can,
 
 [SpectraST](http://tools.proteomecenter.org/wiki/index.php?title=Software:SpectraST) is an integral component of the [Trans Proteomic Pipeline suite (TPP)](http://tools.proteomecenter.org/wiki/index.php?title=Software:TPP) of software. A compiled executable file is included here, which can be used alone without other TPP components.
 
-We encourage useres to download and install the entire TPP suite, which provides other useful functionaliteissuch as raw data importation, automatic validation of search results, protein inference, and quantification and visualization. Please refer to the guides for [TPP Linux installation](http://tools.proteomecenter.org/wiki/index.php?title=Linux_Installation_Guides), and the official download site for [Windows installer](http://tools.proteomecenter.org/wiki/index.php?title=TPP:5.2_Installation).
+We encourage users to download and install the entire TPP suite, which provides other useful functionalities such as raw data importation, automatic validation of search results, protein inference, and quantification and visualization. Please refer to the guides for [TPP Linux installation](http://tools.proteomecenter.org/wiki/index.php?title=Linux_Installation_Guides), and the official download site for [Windows installer](http://tools.proteomecenter.org/wiki/index.php?title=TPP:5.2_Installation).
 
 - **edgeR (v3.34.0)**
 
@@ -118,7 +118,7 @@ Output
 usage: metaSpectraST_SIn.py [-h] [-s [SPTXT]] -m MGF [MGF ...]
 
 metaSpectraST (v0.0) by Hao, Chunlin.
-Compute normalized spectral index (SIn) of cnsensus spectra.
+Compute normalized spectral index (SIn) of consensus spectra.
 
 optional arguments:
   -h, --help        show this help message and exit
@@ -127,7 +127,7 @@ optional arguments:
 ```
 
 ## Step 1: performing spectral clustering
-Run the following command to perfom spectral clustering:
+Run the following command to perform spectral clustering:
 
 ```shell
 metaspectrast cluster <path/*mzML>
@@ -142,7 +142,7 @@ metaspectrast cluster -i HCD <path/*mzML>
 When this step is done, it produces three types of output file in the working directory. The file ```bar.splib``` is the spectra library in a binary format. The ```bar.sptxt``` is a human-readable version of the bar.splib. The files ```bar.spidx``` and ```bar.pepidx``` are indices on the precursor m/z value and peptide, respectively. The file ```grandConsensus.sptxt``` is the library of consensus spectra, which will be used in the subsequent steps. A library of consensus spectra in .mgf format is also produced, named as ```grandConsensus.mgf```.
 
 ## Step 2: profiling samples
-Consensus spectrum created in step 1 can be quantified by counting the the number (spectral count, SC) or intentisity (spectral index, SI<sub>N</sub>) of the replicate spectra (raw spectra) in the corresponding spectral cluster in the sample. Quantified consensus spectra can then be used to profile the samples.
+Consensus spectrum created in step 1 can be quantified by counting the number (spectral count, SC) or intensity (spectral index, SI<sub>N</sub>) of the replicate spectra (raw spectra) in the corresponding spectral cluster in the sample. Quantified consensus spectra can then be used to profile the samples.
 
 **Spectral count-based (SC) profiling**
 
@@ -161,7 +161,7 @@ Note that the .mgf file has to be named the same as the the corresponding input 
 
 When it is done, it produces three CSV files, ```unnorm_consensusPep_SI.csv```, ```consensusPep_SIn.csv``` and ```consensusSpec_RawSpectra_idx.csv```. Similar to SC profiling, the file unnorm_consensusPep_SI.csv is unnormalized spectral index of consensus spectra in each sample, which can be normalized by the ```normalize``` module (see [Step 3](https://github.com/bravokid47/metaSpectraST#step-3-classifying-samples-and-visulization)). The file consensusPep_SIn.csv is the same file as unnorm_consensusPep_SI.csv, but normalized by the sum of the spectral index in each data set. The file consensusSpec_RawSpectra_idx.csv is the index of the correspondence of raw spectrum and its consensus spectrum.
 
-## Step 3: classifying samples and visulization
+## Step 3: classifying samples and visualization
 Hierarchical clustering of samples can be performed based on their SI<sub>N</sub> or SC profiles. But before that, SI<sub>N</sub> or SC profiles need to be normalized.
 
 ### Normalization
@@ -180,13 +180,13 @@ Run the following command to perform the hierarchical clustering on samples.
 metaspectrast classify -n tmmNorm_consensusPep.csv
 ```
 
-If you are working with microbial communities in or on a host organism, such as gut microbiome, you could exclude the consensus spectra of the host peptides by providing metaSpectraST a .txt file containing containing a single column of the full name of the consensus spectra that need to be excluded. Consensus spectra of host peptides can be identified by database search of the consensus spectra library (```grandConsensus.mgf```) against the host proteome database.
+If you are working with microbial communities in or on a host organism, such as gut microbiome, you could exclude the consensus spectra of the host peptides by providing metaSpectraST a .txt file containing a single column of the full name of the consensus spectra that need to be excluded. Consensus spectra of host peptides can be identified by database search of the consensus spectra library (```grandConsensus.mgf```) against the host proteome database.
 
 ```shell
 metaspectrast classify -n tmmNorm_consensusPep.csv -r removal.txt
 ```
 
-Further refinement of the SI<sub>N</sub> or SC profiles can be conducted through the ```-o``` option, which specifies the minimum number of samples that a consensus spectrum has to be observed in. This opiton can help filter out the singly or rarely observed consensus spectra. Default is 1.
+Further refinement of the SI<sub>N</sub> or SC profiles can be conducted through the ```-o``` option, which specifies the minimum number of samples that a consensus spectrum has to be observed in. This option can help filter out the singly or rarely observed consensus spectra. Default is 1.
 
 ```shell
 metaspectrast classify -n tmmNorm_consensusPep.csv -r removal.txt -o 3
@@ -195,13 +195,13 @@ metaspectrast classify -n tmmNorm_consensusPep.csv -r removal.txt -o 3
 At the end of the day, two figures are produced. One is the file ```hierarchicalHeatmap.png```, which is a heatmap with some decorations showing the clusters of the samples. The other is the file ```dendrogram.png```, which is a dendrogram of the clusters of the samples.
 
 ## Reconciliation
-Peptide sequences of raw spectra and consensus spectra can be identified thorugh multiple peptide identification methods, including database search, open modification search, and *de novo* sequencing. Replicate spectra and the consensus spectrum in one spectral cluster may be identified as conflicting peptide sequences by different identification methods. The ```reconcile``` module employs a heuristic reconciliation scheme to resolve the conflicts and correct seqeunce errors.
+Peptide sequences of raw spectra and consensus spectra can be identified through multiple peptide identification methods, including database search, open modification search, and *de novo* sequencing. Replicate spectra and the consensus spectrum in one spectral cluster may be identified as conflicting peptide sequences by different identification methods. The ```reconcile``` module employs a heuristic reconciliation scheme to resolve the conflicts and correct sequence errors.
 
 **Reconciliation scheme**
 
 ![reconcile](fig/fig3_reconciliation_scheme.png)
 
-**Prepareing identification results**
+**Preparing identification results**
 
 To run the ```reconcile``` module, you need to prepare the identification results first. It's very simple. You just need to organize the identification results of raw spectra as CSV files containing at least two columns, ```RawSpectrum``` and ```peptide```. The 'RawSpectrum' column lists the recorded name of each raw spectrum, while the 'peptide' column lists the peptide sequence assigned to each raw spectrum. If the identification method provides protein information, you can add it as an additional column with the header of ```protein```. Identification results from different identification methods should be organized as separate CSV files. For identification results of consensus spectra, please change the header ```RawSpectrum``` to ```consensusSpec```.
 
