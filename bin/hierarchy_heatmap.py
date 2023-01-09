@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Hao, Chunlin @ 20210322
+# Hao, Chunlin @20210322
+# Hao, Chunlin @20230109, fix the TypeError of variable 'observe', line 38, change str to int
 
 import pandas as pd
 import numpy as np
@@ -35,7 +36,7 @@ Used to filter out singly or rarely observed cosensus spectra. Default is 1.
 argms = parser.parse_args()
 data = argms.df
 host = argms.host
-observe = argms.observation
+observe = int(argms.observation)
 
 df_norm = pd.read_csv(data, index_col=0)
 df_norm.index.name = 'Consensus peptides'
