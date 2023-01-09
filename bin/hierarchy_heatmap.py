@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Hao, Chunlin @20210322
-# Hao, Chunlin @20230109, fix the TypeError of variable 'observe', line 38, change str to int
+# Hao, Chunlin @20230109, fix the TypeError of variable 'observe', line 39, change str to int
 
 import pandas as pd
 import numpy as np
