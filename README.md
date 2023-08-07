@@ -227,4 +227,6 @@ Author: Hao, Chunlin
 Principle Investigators: Henry H. N. Lam (HKUST), Patrick K. H. Lee (CityU), and Joshua Elias (CZ Biohub).
 
 ## How to cite
+Hao, C., Elias, J.E., Lee, P.K.H. et al. metaSpectraST: an unsupervised and database-independent analysis workflow for metaproteomic MS/MS data using spectrum clustering. Microbiome 11, 176 (2023). https://doi.org/10.1186/s40168-023-01602-1
+[https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-023-01602-1#citeas](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-023-01602-1#citeas)
 
